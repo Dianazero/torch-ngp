@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     # construct frames
     frames = []
-    for i in range(1, 40+1):
+    for i in range(1, 150+1):
         # ratio = np.sin(((i / self.video_frame_num) - 0.5) * np.pi) * 0.5 + 0.5
         ratio = np.sin(((i/40) - 0.5) * np.pi) * 0.5 + 0.5
         pose = np.eye(4, dtype=np.float32)
@@ -93,9 +93,10 @@ if __name__ == '__main__':
         pose[:3, 3] = (1 - ratio) * pose0[:3, 3] + ratio * pose1[:3, 3]
         
         pose = ngp_matrix_to_nerf(pose, scale=1) # [4, 4]
+        m_path = 'output/chair/' 
 
         frames.append({
-            'file_path':  f'{i:03d}.mp4',
+            'file_path':  m_path + f'{i:03d}.jpg',
             'transform_matrix': pose.tolist(),
         })
 
